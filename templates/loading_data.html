@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <body id="plotly">
+        <!-- DNA image at the top -->
+        <div class="centered-container">
+            <img class="centered-image" src="{{ url_for('static', filename='images/dna.png') }}" alt="Image">
+        </div>
+
+        <!-- Title at the top -->
+        <h2>{% block title %} Example plotly {% endblock %}</h2>
+        
+        <!-- Subtitle below the title -->
+        <h3>Here's an example of an interactive plotly plot</h3>
+
+        <!-- Here's the first block: GWAS choice, Reference genome and Browsing options -->
+        <form id="viewtype_form" method="post">
+            <!-- Browsing option -->
+            <div style="padding: 10px; background-color: #9FD8C6; margin: 20px; width: 20%; float:left">
+                <h1>Browsing options</h1>
+                <style>
+                    /* Style for the textarea */
+                    #browse_option {
+                        height: 30px; /* Adjust the height as needed */
+                        font-size: 16px; /* Adjust the font size as needed */
+                    }
+                </style>
+                I want to select a:
+                <select id="viewtype" name="viewtype" onchange="submitForm()">   
+                    <option disabled selected value> -- select an option -- </option>      
+                    <option value="0">Position</option>       
+                    <option value="1">SVID</option>       
+                    <option value="2">RSID</option>
+                    <option value="3">Region</option>
+                </select>
+            </div>
+        </form>
+
+        {% block specify_selection %} {% endblock %}
+
+        {% block plot %} {% endblock %}
+
+        <!-- Footnote images -->
+        <div class="image-container-foot">
+            <img src="{{ url_for('static', filename='images/amstUMC.jpg') }}" alt="ams">
+            <img src="{{ url_for('static', filename='images/tudelft1.png') }}" alt="tud">
+            <img src="{{ url_for('static', filename='images/github.png') }}" alt="gith">
+        </div>
+        {% block js %} {% endblock %}
+        <script type="text/javascript">
+            function submitForm() {
+                const form = document.getElementById("viewtype_form");
+                const selection = document.getElementById("viewtype").value;
+    
+                switch(selection) {
+                    case "0":
+                        form.action = "/snp";
+                        break;
+                    case "1":
+                        form.action = "/sv";
+                        break;
+                    case "2":
+                        form.action = "/trait";
+                        break;
+                    case "3":
+                        form.action = "/region";
+                        break;
+                    default:
+                        form.action = "/loading_data";
+                }
+                form.submit();
+            }
+        </script>
+    </body>
+{% endblock %}

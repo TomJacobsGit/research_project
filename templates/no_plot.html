@@ -1,0 +1,53 @@
+{% extends 'loading_data.html' %}
+
+{% block specify_selection %}
+<form id="exploration_form" method="post">
+    <!-- Browsing option -->
+    <div style="padding: 10px; background-color: #9FD8C6; margin: 20px; width: 60%; float: left">
+        {% block select_lines %} {% endblock %}
+        <style>
+            /* Style for the textarea */
+            #browse_option {
+                height: 30px; /* Adjust the height as needed */
+                font-size: 16px; /* Adjust the font size as needed */
+            }
+        </style>
+        {% block viewtype %} {% endblock %}
+        Window <input type="range" min="1000" max="250000" value="{{ request.form.get('window', '25000') }}" step="1000" name="window" oninput="updateValue(this.value)">
+        <p>Current value: <span id="slider-value">{{ request.form.get('window', '25000') }}</span></p>
+        Color:
+        <select id="color" name="color">
+            <option value="snp">SNP</option>          
+            <option value="sv">SV</option>
+            <option value="trait">Trait</option>
+            <option value="snp_type">SNP type</option>
+            <option value="sv_type">SV type</option> 
+            <option value="corr">Correlation</option>
+        </select>
+    </div>
+    
+    <!-- Submit button to start the search -->
+    <div style="padding: 10px; background-color: #9FD8C6; margin: 20px; text-align: center">
+        <button style="background-color: #4C837A; color: white">Show region!</button>
+    </div>
+</form>
+{% endblock %}
+
+{% block js %}
+<script>
+    window.onload = function() {
+        const form = document.getElementById('exploration_form');
+        const currentPath = window.location.pathname;
+
+        if (currentPath.startsWith('/snp')) {
+            form.action = '/snp/plot';
+        } else if (currentPath.startsWith('/sv')) {
+            form.action = '/sv/plot';
+        } else if (currentPath.startsWith('/trait')) {
+            form.action = '/trait/plot'
+        } else if (currentPath.startsWith('/region')) {
+            form.action = '/region/plot'
+        }
+    }
+</script>
+{% endblock %}

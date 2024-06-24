@@ -1,0 +1,10 @@
+{% extends 'no_plot.html' %}
+
+{% block viewtype %}
+
+<div>
+    Start: <input id="start" type="text" name="start" placeholder="49900000" value="{{ request.form.get('start', '') }}"><br>
+    End: <input id="end" type="text" name="end" placeholder="50100000" value="{{ request.form.get('end', '') }}"><br> 
+</div>
+
+{% endblock %}

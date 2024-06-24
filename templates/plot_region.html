@@ -1,0 +1,29 @@
+{% extends 'viewtype_region.html' %}
+
+{% block select_lines %}
+<div style="height: 100%; width: 20%; float:right">
+    <select id="single_snp" name="single_snp" onchange="submitSNP()", style="width: 100%;">
+        {% for item in svs %}
+          <option value="{{ item }}">{{ item }}</option>
+        {% endfor %}
+    </select>
+    <script type="text/javascript">
+        function submitSNP() {
+            const form = document.getElementById("exploration_form");
+            form.submit();
+        }
+    </script>
+</div>
+{% endblock %}
+
+{% block plot %}
+<div style="display: flex; flex-direction: column; text-align: center;">
+{% if plot %}
+<div id="plot"></div>
+    <script>
+        var plot = {{ plot | safe }};
+        Plotly.newPlot('plot', plot.data, plot.layout);
+    </script>
+{% endif %}
+    </div>
+{% endblock %}

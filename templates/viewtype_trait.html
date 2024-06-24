@@ -1,0 +1,24 @@
+{% extends 'no_plot.html' %}
+
+{% block viewtype %}
+
+<div>
+    <select id="selected_traits" name="selected_traits" multiple="multiple" style="width: 50%;">
+        {% for item in traits %}
+          <option value="{{ item }}">{{ item }}</option>
+        {% endfor %}
+    </select>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#selected_traits').select2();
+        });
+
+        function submitForm() {
+            document.getElementById('myForm').submit();
+        }
+    </script>
+</div>
+
+{% endblock %}

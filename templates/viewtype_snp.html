@@ -1,0 +1,20 @@
+{% extends 'no_plot.html' %}
+
+{% block viewtype %}
+
+<div>
+    <select id="selected_snps" name="selected_snps" multiple="multiple" style="width: 50%;">
+        {% for item in snps %}
+          <option value="{{ item }}">{{ item }}</option>
+        {% endfor %}
+    </select>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#selected_snps').select2();
+        });
+    </script>
+</div>
+
+{% endblock %}

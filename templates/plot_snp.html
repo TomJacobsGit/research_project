@@ -1,0 +1,17 @@
+{% extends 'viewtype_snp.html' %}
+
+{% block select_lines %}
+<div style
+{% endblock %}
+
+{% block plot %}
+<div style="display: flex; flex-direction: column; text-align: center;">
+{% if plot %}
+<div id="plot"></div>
+    <script>
+        var plot = {{ plot | safe }};
+        Plotly.newPlot('plot', plot.data, plot.layout);
+    </script>
+{% endif %}
+    </div>
+{% endblock %}

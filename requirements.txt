@@ -1,0 +1,7 @@
+pandas
+matplotlib
+numpy
+flask
+ipywidgets
+scipy
+kaleido==0.1.0post1

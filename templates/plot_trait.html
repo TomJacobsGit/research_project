@@ -1,0 +1,17 @@
+{% extends 'viewtype_trait.html' %}
+
+{% block select_lines %}
+<!-- <div style="padding: 10px; margin: 20px; width: 45%; float:left"></div> -->
+{% endblock %}
+
+{% block plot %}
+<div style="display: flex; flex-direction: column; text-align: center;">
+{% if plot %}
+<div id="plot"></div>
+    <script>
+        var plot = {{ plot | safe }};
+        Plotly.newPlot('plot', plot.data, plot.layout);
+    </script>
+{% endif %}
+    </div>
+{% endblock %}
