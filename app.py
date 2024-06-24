@@ -99,7 +99,8 @@ def region_plot():
     snp = request.form.get("single_snp", None)
 
     mid_df = data.sv_df.loc[(data.sv_df["start"].astype("int") > start) & (data.sv_df["end"].astype("int") < end)]
-    
+    svs = mid_df["sv_id"]
+
     merged_df = mid_df.merge(data.snp_sv_df, left_on='sv_id', right_on='sv_id', how='inner')
     snp_sv_df = merged_df[(merged_df['POS'].astype(int) > merged_df['start'].astype(int) - window) & (merged_df['POS'].astype(int) < merged_df['end'].astype(int) + window)]
 
